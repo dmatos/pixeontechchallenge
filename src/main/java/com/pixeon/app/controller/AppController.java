@@ -8,6 +8,6 @@ public class AppController {
 
     @RequestMapping("/")
     public String index(){
-        return "Bem-vindo ao Pìxeon Tech Challenge!";
+        return "Welcome to Pìxeon Tech Challenge!";
     }
 }

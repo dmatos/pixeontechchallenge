@@ -5,20 +5,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "health_care_institution", schema = "pixeon")
+@Table(name = "health_care_institution")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HealthCareInstitutionModel {
+public class HealthCareInstitution {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //TODO nome não pode ser vazio
-    private String name;
+    private String Name;
 
-    //TODO deve-se validar CNPJ na criação
     private String CNPJ;
+
+    @PrePersist
+    public void prePersist(){
+        this.CNPJ = this.CNPJ.replaceAll("[^\\d]", "");
+    }
+
 }
