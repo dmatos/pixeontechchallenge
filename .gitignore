@@ -1,0 +1,15 @@
+.settings
+.project
+*.project
+.classpath
+target
+**/target/*
+.idea
+.factorypath
+*.iml
+node_modules
+dist
+bin
+.DS_Store
+.mvn
+*.class
