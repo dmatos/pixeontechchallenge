@@ -1,5 +1,6 @@
 package com.pixeon.app.view;
 
+import com.pixeon.app.model.HealthCareInstitution;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,11 +8,23 @@ import lombok.NoArgsConstructor;
 import java.lang.reflect.Field;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class HealthCareInstitutionView {
-    private String name;
-    private String CNPJ;
+@NoArgsConstructor
+public class ExamView {
+
+    private HealthCareInstitutionView healthCareInstitution;
+
+    private String patientName;
+
+    private Integer patientAge;
+
+    private String patientGender;
+
+    private String physicianName;
+
+    private String physicianCRM;
+
+    private String procedureName;
 
     public boolean isValid(){
         try {
@@ -22,9 +35,5 @@ public class HealthCareInstitutionView {
         }catch(IllegalAccessException ex){
             return false;
         }
-    }
-
-    public String getCNPJ(){
-        return this.CNPJ.replaceAll("[^\\d]", "");
     }
 }

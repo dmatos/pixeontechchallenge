@@ -1,6 +1,6 @@
 package com.pixeon.app.repository;
 
-import com.pixeon.app.model.HealthCareInstitution;
+import com.pixeon.app.model.Exam;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.CrudRepository;
@@ -11,17 +11,14 @@ import javax.persistence.QueryHint;
 import java.util.Optional;
 
 @Repository
-public interface HealthCareInstitutionRepository extends CrudRepository<HealthCareInstitution, Long> {
+public interface ExamRepository extends CrudRepository<Exam, Long> {
 
-    Optional<HealthCareInstitution> findFirstByCNPJAndName(String cnpj, String name);
+    @Lock(LockModeType.PESSIMISTIC_READ)
+    @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})
+    Optional<Exam> findFirstById(Long id);
 
     @Override
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})
-    HealthCareInstitution save(HealthCareInstitution healthCareInstitution);
-
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})
-    void deleteByCNPJ(String CNPJ);
-
+    Exam save(Exam exam);
 }

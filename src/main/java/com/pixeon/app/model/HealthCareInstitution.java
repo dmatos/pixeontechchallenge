@@ -17,8 +17,10 @@ public class HealthCareInstitution {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String Name;
+    @Column(nullable = false)
+    private String name;
 
+    @Column(nullable = false)
     private String CNPJ;
 
     @PrePersist

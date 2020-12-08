@@ -8,6 +8,9 @@ import java.util.InputMismatchException;
 public class CNPJValidator {
 
     public static boolean isCNPJ(String CNPJ) {
+
+        //TODO ajustar primeiro IF abaixo para que fique mais elegante a busca por digitos repetidos
+
         CNPJ = CNPJ.replaceAll("[^\\d]", "");
         log.debug("Validando CNPJ: "+CNPJ);
         // considera-se erro CNPJ's formados por uma sequencia de numeros iguais
