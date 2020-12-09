@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class Exam {
     private Long id;
 
     @JoinColumn(name = "health_care_institution_id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private HealthCareInstitution healthCareInstitution;
 
     private String patientName;
@@ -39,9 +40,23 @@ public class Exam {
 
     private Boolean paid;
 
+    @Column(nullable = false)
+    private LocalDateTime dateOfInclusion;
+
+    private LocalDateTime dateOfLastUpdate;
+
+    @Version
+    private Long version;
+
     @PrePersist
     public void prePersist(){
+        this.dateOfInclusion = LocalDateTime.now();
         this.alreadyRetrieved = false;
         this.paid = false;
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        this.setDateOfLastUpdate(LocalDateTime.now());
     }
 }

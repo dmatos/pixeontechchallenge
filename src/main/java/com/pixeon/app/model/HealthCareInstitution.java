@@ -6,9 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "health_care_institution")
+@Table(name = "health_care_institution",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "cnpj"})
+})
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,14 +20,18 @@ public class HealthCareInstitution {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "cnpj", nullable = false)
     private String CNPJ;
+
+    @Column(nullable = false)
+    private LocalDateTime dataInclusaoRegistro;
 
     @PrePersist
     public void prePersist(){
+        this.dataInclusaoRegistro = LocalDateTime.now();
         this.CNPJ = this.CNPJ.replaceAll("[^\\d]", "");
     }
 

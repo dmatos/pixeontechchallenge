@@ -18,7 +18,7 @@ public class BudgetService {
     BudgetRepository budgetRepository;
 
     @Transactional
-    public boolean initializeBudget(HealthCareInstitution hci) throws Exception{
+    public boolean initializeBudget(HealthCareInstitution hci) {
         Optional<Budget> optionalBudget = budgetRepository.findByHealthCareInstitution(hci);
         if(optionalBudget.isPresent()){
             return false;
@@ -27,22 +27,6 @@ public class BudgetService {
         budget.setHealthCareInstitution(hci);
         budgetRepository.save(budget);
         return true;
-    }
-
-    @Transactional
-    public void deleteBudget(HealthCareInstitution hci){
-        Optional<Budget> optionalBudget = budgetRepository.findByHealthCareInstitution(hci);
-        if(optionalBudget.isPresent()){
-            budgetRepository.deleteById(optionalBudget.get().getId());
-        }
-    }
-
-    public Budget getCurrentBudget(HealthCareInstitution hci){
-        Optional<Budget> optionalBudget = budgetRepository.findByHealthCareInstitution(hci);
-        if(optionalBudget.isPresent()){
-            return optionalBudget.get();
-        }
-        return null;
     }
 
     @Transactional

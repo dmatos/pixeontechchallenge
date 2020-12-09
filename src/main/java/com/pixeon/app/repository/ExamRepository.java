@@ -1,6 +1,7 @@
 package com.pixeon.app.repository;
 
 import com.pixeon.app.model.Exam;
+import com.pixeon.app.model.HealthCareInstitution;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.CrudRepository;
@@ -15,7 +16,7 @@ public interface ExamRepository extends CrudRepository<Exam, Long> {
 
     @Lock(LockModeType.PESSIMISTIC_READ)
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})
-    Optional<Exam> findFirstById(Long id);
+    Optional<Exam> findFirstByIdAndHealthCareInstitution(Long id, HealthCareInstitution hci);
 
     @Override
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})

@@ -1,17 +1,20 @@
 package com.pixeon.app.view;
 
-import com.pixeon.app.model.HealthCareInstitution;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.lang.reflect.Field;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExamView {
 
+    private Long id = 0L;
+
+    private Long version = 0L;
+
+    @NotNull
     private HealthCareInstitutionView healthCareInstitution;
 
     private String patientName;
@@ -26,14 +29,4 @@ public class ExamView {
 
     private String procedureName;
 
-    public boolean isValid(){
-        try {
-            boolean valid = true;
-            for (Field f : getClass().getDeclaredFields())
-                valid = valid && (f.get(this) != null);
-            return valid;
-        }catch(IllegalAccessException ex){
-            return false;
-        }
-    }
 }

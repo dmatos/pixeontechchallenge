@@ -1,15 +1,14 @@
 package com.pixeon.app.controller;
 
-import com.pixeon.app.exception.HCIExistsException;
-import com.pixeon.app.model.HealthCareInstitution;
+import com.pixeon.app.exception.HCIAlreadyExistsException;
+import com.pixeon.app.exception.InvalidCNPJException;
+import com.pixeon.app.exception.InvalidHCIDataInputException;
 import com.pixeon.app.service.HealthCareInstitutionService;
 import com.pixeon.app.view.HealthCareInstitutionView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.InputMismatchException;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,29 +19,11 @@ public class HealthCareInstitutionController {
     private HealthCareInstitutionService service;
 
     @PostMapping("create")
-    public String create(@RequestBody HealthCareInstitutionView view){
-        try {
-            if(service.createNewInstitution(view))
-                return "Institution " + view.getName() + " - " + view.getCNPJ() + " creation success.";
-            else return "Institution " + view.getName() + " - " + view.getCNPJ() + " creation failure.";
-        }catch(Exception e){
-            return e.getMessage();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public String create(@RequestBody HealthCareInstitutionView view)
+            throws InvalidCNPJException, InvalidHCIDataInputException, HCIAlreadyExistsException {
+        if(service.createNewInstitution(view))
+            return "Institution " + view.getName() + " - " + view.getCNPJ() + " creation success.";
+        throw new InvalidHCIDataInputException();
     }
-
-    @DeleteMapping("delete")
-    public Boolean delete(@RequestBody HealthCareInstitutionView view){
-        try {
-            return service.deleteInstitution(view);
-        } catch(Exception e){
-            log.debug(e.getMessage());
-            return false;
-        }
-    }
-
-    @GetMapping("list")
-    public List<HealthCareInstitution> list(){
-        return service.findAll();
-    }
-
 }
