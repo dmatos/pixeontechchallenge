@@ -20,8 +20,4 @@ public interface HealthCareInstitutionRepository extends CrudRepository<HealthCa
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})
     HealthCareInstitution save(HealthCareInstitution healthCareInstitution);
 
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})
-    void deleteByCNPJ(String CNPJ);
-
 }

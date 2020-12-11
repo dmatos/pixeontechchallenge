@@ -20,10 +20,10 @@ public class HealthCareInstitutionController {
 
     @PostMapping("create")
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestBody HealthCareInstitutionView view)
+    public HealthCareInstitutionView create(@RequestBody HealthCareInstitutionView view)
             throws InvalidCNPJException, InvalidHCIDataInputException, HCIAlreadyExistsException {
         if(service.createNewInstitution(view))
-            return "Institution " + view.getName() + " - " + view.getCNPJ() + " creation success.";
+            return view;
         throw new InvalidHCIDataInputException();
     }
 }

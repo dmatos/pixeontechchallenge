@@ -37,8 +37,7 @@ public class HCIAndExamCreationTests extends AppApplicationTests implements Runn
         log.info(hciRequestJson);
 
         this.mvc.perform(post(this.healthCareUrl+"/create").contentType(APPLICATION_JSON_UTF8).content(hciRequestJson))
-                .andExpect(status().isCreated())
-                .andExpect(content().string("Institution "+view.getName()+" - "+view.getCNPJ()+ " creation success."));
+                .andExpect(status().isCreated());
 
         this.mvc.perform(post(this.healthCareUrl+"/create").contentType(APPLICATION_JSON_UTF8).content(hciRequestJson))
                 .andExpect(status().isBadRequest());

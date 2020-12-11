@@ -55,10 +55,10 @@ public class ExamController {
     @DeleteMapping("{exam_id}/delete")
     @ResponseStatus(HttpStatus.OK)
     public void delete(
-            @RequestBody ExamView view,
+            @RequestBody HealthCareInstitutionView view,
             @PathVariable("exam_id") Long exam_id)
             throws ExamNotFoundException, HCINotFoundException{
-        HealthCareInstitution hci = healthCareInstitutionService.findByNameAndCNPJ(view.getHealthCareInstitution());
+        HealthCareInstitution hci = healthCareInstitutionService.findByNameAndCNPJ(view);
         examService.delete(hci, exam_id);
     }
 

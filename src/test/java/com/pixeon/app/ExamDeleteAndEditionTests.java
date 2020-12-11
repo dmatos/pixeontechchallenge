@@ -38,8 +38,7 @@ public class ExamDeleteAndEditionTests extends AppApplicationTests implements Ru
         log.info(hciRequestJson);
 
         this.mvc.perform(post(this.healthCareUrl+"/create").contentType(APPLICATION_JSON_UTF8).content(hciRequestJson))
-                .andExpect(status().isCreated())
-                .andExpect(content().string("Institution "+hciView.getName()+" - "+hciView.getCNPJ()+ " creation success."));
+                .andExpect(status().isCreated());
 
         ExamView examView = new ExamView();
         examView.setHealthCareInstitution(hciView);
@@ -71,7 +70,7 @@ public class ExamDeleteAndEditionTests extends AppApplicationTests implements Ru
         Assertions.assertThat(examView.getPhysicianName()).isEqualTo("Dr. Pink");
 
         examRequestJson = ow.writeValueAsString(examView);
-        this.mvc.perform(delete(this.examUrl+"/"+examView.getId()+"/delete").contentType(APPLICATION_JSON_UTF8).content(examRequestJson))
+        this.mvc.perform(delete(this.examUrl+"/"+examView.getId()+"/delete").contentType(APPLICATION_JSON_UTF8).content(hciRequestJson))
                 .andExpect(status().isOk());
 
     }

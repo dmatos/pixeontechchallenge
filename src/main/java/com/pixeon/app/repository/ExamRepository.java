@@ -14,12 +14,10 @@ import java.util.Optional;
 @Repository
 public interface ExamRepository extends CrudRepository<Exam, Long> {
 
-    @Lock(LockModeType.PESSIMISTIC_READ)
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})
     Optional<Exam> findFirstByIdAndHealthCareInstitution(Long id, HealthCareInstitution hci);
 
     @Override
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value   ="10000")})
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
     Exam save(Exam exam);
 }
