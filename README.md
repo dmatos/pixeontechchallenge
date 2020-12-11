@@ -1,8 +1,7 @@
 ### Building
 
 **[Important]**: Make sure JAVA_HOME is defined with **Java 11** JDK path.
-Fields **spring.datasource.username** and **spring.datasource.password** must be configured on application.properties
- with appropriate values. 
+Properties of **spring.datasource** must be configured on application.properties with appropriate values. 
 
 In project's root directory: 
 
