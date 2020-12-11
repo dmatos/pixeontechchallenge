@@ -21,7 +21,7 @@ These endpoints accept arguments as JSON in the request body and return results 
 JSON field names are case insensitive.
 
 
-####[POST] /health-care-institution/create
+#### [POST] /health-care-institution/create
 
 - url structure
 ```
@@ -45,7 +45,7 @@ http://hostname[:port]/health-care-institution/create
     - **[HTTP 404]** HCINotFoundException
     
 
-####[POST] /exam/create
+#### [POST] /exam/create
 
 - url structure
 ```
@@ -81,7 +81,7 @@ http://hostname[:port]/exam/create
     - **[HTTP 400]** InvalidExamDataInputException, OutOfBudgetExeption
     - **[HTTP 404]** HCINotFoundException
     
-####[GET] /exam/{exam_id}
+#### [GET] /exam/{exam_id}
 
 - url structure
 ```
@@ -108,7 +108,7 @@ http://hostname[:port]/exam/create/{exam_id}
     - **[HTTP 400]** OutOfBudgetExeption
     - **[HTTP 404]** HCINotFoundException, ExamNotFoundException
     
-####[DELETE] /exam/{exam_id}/delete
+#### [DELETE] /exam/{exam_id}/delete
 
 - url structure
 ```
@@ -135,7 +135,7 @@ http://hostname[:port]/exam/create/{exam_id}/delete
     - **[HTTP 400]** OutOfBudgetExeption
     - **[HTTP 404]** HCINotFoundException, ExamNotFoundException
     
-####[POST] /exam/{exam_id}/update
+#### [POST] /exam/{exam_id}/update
 
 - url structure
 ```
