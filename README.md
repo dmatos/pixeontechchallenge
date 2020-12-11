@@ -176,4 +176,3 @@ http://hostname[:port]/exam/create/{exam_id}/delete
 - errors
     - **[HTTP 400]** OutOfBudgetExeption
     - **[HTTP 404]** HCINotFoundException, ExamNotFoundException
-    - **[HTTP 409]** *Outdated exam version conflict*
